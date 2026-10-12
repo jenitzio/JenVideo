@@ -22,9 +22,11 @@ jobs:
 
       - name: Compile engine.cpp
         run: >
-          emcc engine.cpp -O2 -std=c++17
+          emcc engine.cpp -O3 -std=c++17
           -sMODULARIZE=1 -sEXPORT_NAME=EngineModule
           -sSINGLE_FILE=1 -sENVIRONMENT=web -sALLOW_MEMORY_GROWTH=1
+          -sSTACK_SIZE=1048576
+          -sEXPORTED_RUNTIME_METHODS=ccall,UTF8ToString
           -o engine.js
 
       - uses: actions/upload-artifact@v4
@@ -70,7 +72,7 @@ jobs:
             "name": "cutline",
             "productName": "Cutline",
             "version": "${VERSION}",
-            "description": "Video editor with a C++ engine, GLSL renderer and HTML/CSS/JS interface",
+            "description": "Pro video editor: multi-track timeline, titles, music, transitions, colour grading and effects - C++/WebAssembly engine with a GLSL renderer",
             "author": "Cutline <noreply@cutline.app>",
             "license": "MIT",
             "main": "main.js",
